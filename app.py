@@ -6,8 +6,12 @@ app = Flask(__name__)
 
 # Load model and encoders
 model = joblib.load("model/weather_model.pkl")
+
 city_encoder = joblib.load("model/city_encoder.pkl")
+
 weather_encoder = joblib.load("model/weather_encoder.pkl")
+
+df = pd.read_csv("data/weather_dataset.csv")
 
 
 @app.route("/")
