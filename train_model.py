@@ -4,6 +4,10 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import joblib
+import os
+
+# Create model folder if not exists
+os.makedirs("model", exist_ok=True)
 
 # Load dataset
 df = pd.read_csv("data/weather_dataset.csv")
@@ -32,14 +36,20 @@ y = df["weather_condition"]
 
 # Split dataset
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y,
+    X,
+    y,
     test_size=0.2,
     random_state=42
 )
 
-# Train model
-model = RandomForestClassifier()
+# Optimized smaller model
+model = RandomForestClassifier(
+    n_estimators=50,
+    max_depth=10,
+    random_state=42
+)
 
+# Train model
 model.fit(X_train, y_train)
 
 # Prediction
@@ -50,8 +60,8 @@ accuracy = accuracy_score(y_test, y_pred)
 
 print(f"Model Accuracy: {accuracy * 100:.2f}%")
 
-# Save model
-joblib.dump(model, "model/weather_model.pkl")
+# Save compressed model
+joblib.dump(model, "model/weather_model.pkl", compress=3)
 
 # Save encoders
 joblib.dump(city_encoder, "model/city_encoder.pkl")
