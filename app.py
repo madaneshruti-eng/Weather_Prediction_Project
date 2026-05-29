@@ -5,9 +5,9 @@ import numpy as np
 app = Flask(__name__)
 
 # Load model and encoders
-model = joblib.load("weather_model.pkl")
-city_encoder = joblib.load("city_encoder.pkl")
-weather_encoder = joblib.load("weather_encoder.pkl")
+model = joblib.load("model/weather_model.pkl")
+city_encoder = joblib.load("model/city_encoder.pkl")
+weather_encoder = joblib.load("model/weather_encoder.pkl")
 
 
 @app.route("/")

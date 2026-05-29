@@ -11,8 +11,10 @@ Scripts/
 pyvenv.cfg
 
 # Model files (IMPORTANT)
-model/
-*.pkl
+
 
 # Dataset if large (optional safety)
 data/*.csv
+venv/
+__pycache__/
+*.pyc
